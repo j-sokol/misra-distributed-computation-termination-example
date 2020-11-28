@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  # mongo:
+  #   hostname: "mongo"
+  #   container_name: "mongo"
+  #   image: "mongo"
+  #   networks:
+  #     - cloud-showcase-network
+  distributedapp:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    environment: 
+      - MONGO_HOSTNAME=mongo
+    ports:
+      - "5049:5049"
+    networks:
+      - cloud-showcase-network
+    # depends_on:
+    #   - mongo
+
+networks:
+  cloud-showcase-network:
