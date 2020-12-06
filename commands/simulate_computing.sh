@@ -1,0 +1,1 @@
+curl -XGET '172.22.0.2:5049/compute?compute_time=0.5'

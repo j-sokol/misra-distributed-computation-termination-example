@@ -1,5 +1,11 @@
-flask
-flask-restful
 gunicorn
 meinheld
 event-notifier
+requests
+pydantic
+requests
+fastapi==0.61.1
+pytz
+uvicorn
+starlette==0.13.6
+aiofiles

@@ -1,13 +1,7 @@
 version: '3'
 
 services:
-  # mongo:
-  #   hostname: "mongo"
-  #   container_name: "mongo"
-  #   image: "mongo"
-  #   networks:
-  #     - cloud-showcase-network
-  distributedapp:
+  node1:
     build:
       dockerfile: Dockerfile
       context: .
@@ -16,9 +10,28 @@ services:
     ports:
       - "5049:5049"
     networks:
-      - cloud-showcase-network
-    # depends_on:
-    #   - mongo
-
+      - dapp-network
+  node2:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    environment: 
+      - MONGO_HOSTNAME=mongo
+    networks:
+      - dapp-network
+  node3:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    environment: 
+      - MONGO_HOSTNAME=mongo
+    networks:
+      - dapp-network
+  
 networks:
-  cloud-showcase-network:
+  dapp-network:
+    driver: bridge
+    ipam:
+        driver: default
+        config:
+            - subnet: "10.10.0.0/24"

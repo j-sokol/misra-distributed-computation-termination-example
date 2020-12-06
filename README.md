@@ -14,8 +14,47 @@ TODO
 
 ## Implementace
 
+Aplikace je implementovaná pomocí FastApi frameworku v Pythonu. Distribuovaná applikace je nasazena pomocí Dockeru do virtuální sítě.
+
+
+
+Při posílání tokenu mezi nodami je přidáno čekání
 
 ## Jak spustit semestrálku
+
+Z rootového adresáře tohoto repozitáře je třeba spustit
+
+```
+docker-compose up
+```
+který nasadí 3 instance této aplikace do virtuální docker sítě. 
+
+Pro ukázku výpočtu a Misrova algoritmu v jiném terminálu se připojíme na jednu z instancí
+
+```
+
+```
+
+v adresáři `commands` spustíme příkaz na přidání uzlů do kastru
+
+```
+bash ./commands/add_nodes.sh
+```
+
+Spustíme výpočet pomocí příkazu
+
+```
+bash ./commands/simulate_computing.sh
+```
+V terminálu se spuštěným `docker-compose` uvidíme komunikaci Misrova algoritmu. Po dokončení se zobrazí `COMPUTATION_TERMINATED`. 
+
+Výstup vypadá následovně:
+```
+
+```
+
+
+Ukázku ukončíme zasláním signálu `SIGNINT` procesu s `docker-compose`.
 
 ### Lokálně
 
