@@ -5,8 +5,6 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
-    environment: 
-      - MONGO_HOSTNAME=mongo
     ports:
       - "5049:5049"
     networks:
@@ -15,16 +13,12 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
-    environment: 
-      - MONGO_HOSTNAME=mongo
     networks:
       - dapp-network
   node3:
     build:
       dockerfile: Dockerfile
       context: .
-    environment: 
-      - MONGO_HOSTNAME=mongo
     networks:
       - dapp-network
   

@@ -27,10 +27,10 @@ def custom_openapi(app):
         return app.openapi_schema
 
     openapi_schema = get_openapi(
-        title="Fuzee Routing",
-        version="2.0.1",
+        title="Distributed App",
+        version="0.0.1",
         openapi_version='2',
-        description="Fuzee Routing Planner",
+        description="Distributed app showcase",
         routes=app.routes,
     )
 

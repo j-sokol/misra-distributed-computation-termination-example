@@ -5,7 +5,6 @@ import logging
 class EventHandler():
 
     def handle_send_token():
-        # logging.info("Handling send_token")
 
         logging.info(f"Handling send_token: token_present={Globals.token_present}, is_computing={Globals.is_computing}, colour={Globals.colour}, round={Globals.round}")
 

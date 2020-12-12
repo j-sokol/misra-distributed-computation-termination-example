@@ -11,7 +11,6 @@ from fastapi import APIRouter, Response, status, Body, Depends, Request, Query, 
 from fastapi import BackgroundTasks
 from typing import Optional
 
-# from distributedapp.helper.config import Config
 from distributedapp.helper.globals import notifier
 from distributedapp.helper.globals import Globals
 from distributedapp.helper.my_ip import get_my_ip
@@ -37,9 +36,6 @@ async def assign_token():
         return {"status": "ok", "message": "token assigned"}
 
 
-# @router.get("/eval")
-# async def eval(city):
-#     return [{"type": "walk"}, {"city": city}]
 
 @router.get("/compute")
 async def compute(compute_time: float):
