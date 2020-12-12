@@ -57,7 +57,9 @@ který nasadí 3 instance této aplikace do virtuální docker sítě.
 Pro ukázku výpočtu a Misrova algoritmu v jiném terminálu se připojíme na jednu z instancí
 
 ```
+cluster_node=`docker ps | grep distributed-systems-semestral|head -n1 |cut -d" " -f1`
 
+docker exec -it $cluster_node /bin/bash
 ```
 
 v adresáři `commands` spustíme příkaz na přidání uzlů do kastru
@@ -154,5 +156,6 @@ bash docker-entrypoint.sh
 
 ## Reference
 
-[1] https://moodle-vyuka.cvut.cz/pluginfile.php/307514/mod_page/content/4/MI-DSV_08.pdf
+[1] https://moodle-vyuka.cvut.cz/pluginfile.php/307514/mod_page/content/4/MI-DSV_08.pdf 
+
 [2] https://www.cs.utexas.edu/users/misra/scannedPdf.dir/DetectTerm.pdf 
