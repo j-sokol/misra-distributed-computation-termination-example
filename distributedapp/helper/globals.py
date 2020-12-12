@@ -23,31 +23,22 @@ class Globals(object):
 # Will return next node in circle topology
 def get_next_node():
 
+    # Get uniq and sorted nodes
     node_list: list = list(Globals.nodes)
     node_list.sort()
 
-    # print("sorted_nodes")
-    # print(Globals.nodes)
-
 
     my_ip: str = get_my_ip()
-
-    # print(node_list)
-
     my_index = node_list.index(my_ip)
 
-    logging.info(my_index)
-    logging.info(f'{len(node_list)}, {my_index}')
-    logging.info(f'{node_list.__str__()}, {my_index}')
 
     # Select first node in list
     if my_index >= (len(node_list)-1):
-        logging.info(f'[{my_ip}] Next node is {node_list[0]}')
+        logging.info(f'Next node is {node_list[0]}')
         return node_list[0]
     # Select next node in list
     else:
-        # print(node_list)
-        logging.info(f'[{my_ip}] Next node is {node_list[my_index+1]}')
+        logging.info(f'Next node is {node_list[my_index+1]}')
         return node_list[my_index+1]
 
 # Will forward token to next node in circle topology
@@ -61,3 +52,6 @@ def forward_token(token):
         response.raise_for_status()
     except requests.exceptions.ReadTimeout as e:
         logging.error(f'{e}')
+
+    logging.info(f"Token {token} to {next_node} forwarded, resp={response.text}")
+    

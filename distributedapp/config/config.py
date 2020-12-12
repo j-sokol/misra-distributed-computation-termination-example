@@ -1,10 +1,6 @@
-# import secrets
-# from typing import List, Union
 from functools import lru_cache
-# import os
-# from typing import Optional
 
-from pydantic import BaseSettings # AnyHttpUrl, BaseSettings, validator, Field, BaseModel
+from pydantic import BaseSettings 
 
 
 @lru_cache()

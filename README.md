@@ -9,7 +9,32 @@ Semestrální práce na předmět NI-DSV, 2020
 Pseudokód je převzaný z přednášky v [1]:
 
 ```
-TODO
+color           := black
+token_present   := false
+round           := 0
+state           := not computing (false)
+
+when received message:
+    state = computing (true)
+    color = black
+
+when waiting_for_computing:
+    state = not computing (false)
+
+when received_token(token):
+    round = token
+    token present = True
+    if round == size_of_cluster and color == white:
+        Log out that distributed computation is terminated
+
+when token_present and state == passive (false):
+    if color == black:
+        round = 0
+    else:
+        round = round + 1
+    send token(round) to successor_in_topology
+    color = white
+    token_present = false
 ```
 
 ## Implementace
@@ -41,6 +66,12 @@ v adresáři `commands` spustíme příkaz na přidání uzlů do kastru
 bash ./commands/add_nodes.sh
 ```
 
+Přiřadíme token libovolnému uzlu
+
+```
+bash ./assign_token.sh
+``` 
+
 Spustíme výpočet pomocí příkazu
 
 ```
@@ -50,11 +81,31 @@ V terminálu se spuštěným `docker-compose` uvidíme komunikaci Misrova algori
 
 Výstup vypadá následovně:
 ```
+node2_1  | [2020-12-12 12:57:34,222] [root] [INFO] [10.10.0.2] Handling send_token: token_present=True, is_computing=False, colour=white, round=86
+node2_1  | [2020-12-12 12:57:34,222] [root] [INFO] [10.10.0.2] Next node is 10.10.0.3
+node2_1  | [2020-12-12 12:57:34,222] [root] [INFO] [10.10.0.2] forwarding token 87 to 10.10.0.3
+node1_1  | [2020-12-12 12:57:34,223] [root] [INFO] [10.10.0.4] Token 86 to 10.10.0.2 forwarded, resp={"status":"token received"}
+node3_1  | [2020-12-12 12:57:34,229] [root] [INFO] [10.10.0.3] Received token 87 from 10.10.0.2
+node3_1  | [2020-12-12 12:57:34,229] [root] [INFO] [10.10.0.3] Handling received_token 87
+node3_1  | [2020-12-12 12:57:34,229] [root] [INFO] [10.10.0.3] vars: token_present=False, is_computing=False, colour=white, round=87
+node3_1  | [2020-12-12 12:57:34,229] [root] [ERROR] [10.10.0.3] >>>> COMPUTATION TERMINATION DETECTED
+```
+Případně lze výpočet inicializovat pomocí
+```
+bash ./run_all.sh
+``` 
 
+
+
+Poté lze znovu spustit výpočet pomocí 
+
+
+```
+bash ./commands/simulate_computing.sh
 ```
 
 
-Ukázku ukončíme zasláním signálu `SIGNINT` procesu s `docker-compose`.
+Ukázku ukončíme zasláním signálu `SIGNINT` procesu s `docker-compose` (`^C`).
 
 ### Lokálně
 
