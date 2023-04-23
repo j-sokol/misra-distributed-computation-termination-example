@@ -7,5 +7,5 @@ requests
 fastapi==0.61.1
 pytz
 uvicorn
-starlette==0.13.6
+starlette==0.25.0
 aiofiles
